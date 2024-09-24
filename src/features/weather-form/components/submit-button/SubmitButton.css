@@ -1,0 +1,10 @@
+.weather-form__submit-button {
+    text-align: center;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--clr-primary);
+    cursor: pointer;
+    border-radius: 0.5rem;
+    color: var(--clr-primary);
+    font-weight: 700;
+    background-color: var(--clr-secondary);
+}

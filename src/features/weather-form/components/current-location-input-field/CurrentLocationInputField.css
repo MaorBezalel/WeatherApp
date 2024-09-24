@@ -1,0 +1,9 @@
+.current-location-input-field__prompt-message {
+    color: var(--clr-text);
+    font-size: 1.1rem;
+}
+
+.current-location-input-field__error-message {
+    color: red;
+    font-size: 1.1rem;
+}

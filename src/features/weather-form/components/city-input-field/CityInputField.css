@@ -1,0 +1,26 @@
+.city-input-field {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.city-input-field__label {
+    color: var(--clr-text);
+    font-size: 1.1rem;
+}
+
+.city-input-field__input {
+    padding: 0.1rem;
+    border: 2px solid var(--clr-text);
+    border-radius: 0.5rem;
+    color: var(--clr-text);
+    background-color: var(--clr-background);
+}
+
+.city-input-field__input:focus {
+    outline: none;
+    border-color: var(--clr-primary);
+}

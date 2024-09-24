@@ -1,0 +1,25 @@
+.coordinates-input-field {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.coordinates-input-field__label {
+    color: var(--clr-text);
+    font-size: 1.1rem;
+}
+
+.coordinates-input-field__input {
+    padding: 0.1rem;
+    border: 2px solid var(--clr-text);
+    border-radius: 0.5rem;
+    color: var(--clr-text);
+    background-color: var(--clr-background);
+}
+.coordinates-input-field__input:invalid {
+    border-color: red;
+}
+.coordinates-input-field__input:focus {
+    outline: none;
+    border-color: var(--clr-primary);
+}
