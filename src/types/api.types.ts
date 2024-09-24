@@ -3,7 +3,7 @@ import { Coordinates } from '@/types/data.types';
 export type WeatherAPIResponse = {
     city_name: string;
     country_code: string;
-    data: WeatherData[];
+    data: WeatherForecastData[];
     lat: Coordinates['latitude'];
     lon: Coordinates['longitude'];
     state_code: string;
@@ -12,7 +12,11 @@ export type WeatherAPIResponse = {
     fetchTimestamp: number;
 };
 
-export type WeatherData = {
+export type WeatherAPIErrorResponse = {
+    error: string;
+};
+
+export type WeatherForecastData = {
     /** Formatted as: YYYY-MM-DD */
     valid_date: string;
 
