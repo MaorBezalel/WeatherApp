@@ -1,0 +1,31 @@
+.loading-spinner-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.loading-spinner-svg {
+    height: 3rem; /* 12 * 0.25rem */
+    width: 3rem; /* 12 * 0.25rem */
+    animation: spin 1s linear infinite;
+    color: #2563eb; /* Tailwind's blue-600 */
+}
+
+.loading-spinner-circle {
+    opacity: 0.25;
+}
+
+.loading-spinner-path {
+    opacity: 0.75;
+    fill: currentColor;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
