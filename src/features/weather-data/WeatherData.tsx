@@ -34,7 +34,7 @@ export function WeatherData() {
     if (hasntSearchedYet) {
         return (
             <div className="weather-data">
-                return <h2 className="weather-data__message weather-data__message--no-data">No Data Yet</h2>;{' '}
+                <h2 className="weather-data__message weather-data__message--no-data">No Data Yet</h2>
             </div>
         );
     }
@@ -51,7 +51,7 @@ export function WeatherData() {
     if (errorMessage) {
         return (
             <div className="weather-data">
-                return <h2 className="weather-data__message weather-data__message--error">Error: {errorMessage}</h2>;
+                <h2 className="weather-data__message weather-data__message--error">Error: {errorMessage}</h2>
             </div>
         );
     }
