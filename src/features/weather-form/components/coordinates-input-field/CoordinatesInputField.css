@@ -16,10 +16,72 @@
     color: var(--clr-text);
     background-color: var(--clr-background);
 }
-.coordinates-input-field__input:invalid {
+.coordinates-input-field__input:invalid:focus {
     border-color: red;
 }
 .coordinates-input-field__input:focus {
     outline: none;
     border-color: var(--clr-primary);
+}
+
+@media (max-width: 1280px) {
+    .coordinates-input-field {
+        gap: 0rem;
+        width: 90%;
+    }
+
+    .coordinates-input-field__label {
+        font-size: 1rem;
+    }
+
+    .coordinates-input-field__input {
+        width: 65%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .coordinates-input-field {
+        gap: 2rem;
+        width: 100%;
+    }
+}
+
+@media (max-width: 640px) {
+    .coordinates-input-field {
+        gap: 1.2em;
+    }
+}
+
+@media (max-width: 540px) {
+    .coordinates-input-field {
+        gap: 0.9rem;
+    }
+
+    .coordinates-input-field__label {
+        font-size: 0.9rem;
+    }
+
+    .coordinates-input-field__input {
+        width: 60%;
+    }
+}
+
+@media (max-width: 425px) {
+    .coordinates-input-field {
+        gap: 0.5rem;
+    }
+
+    .coordinates-input-field__label {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .coordinates-input-field {
+        gap: 0.3rem;
+    }
+
+    .coordinates-input-field__label {
+        font-size: 0.7rem;
+    }
 }

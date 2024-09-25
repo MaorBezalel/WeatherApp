@@ -1,12 +1,12 @@
 import '@/features/weather-form/components/coordinates-input-field/CoordinatesInputField.css';
 
-import { useSelector } from 'react-redux';
-import { RootState } from '@/store';
 import { Coordinates } from '@/types/data.types';
 
-export function CoordinatesInputField() {
-    const coordinates = useSelector((state: RootState) => state.weatherForm.value) as Coordinates;
+interface CoordinatesInputFieldProps {
+    previousCoordinates: Coordinates;
+}
 
+export function CoordinatesInputField({ previousCoordinates }: CoordinatesInputFieldProps) {
     const LATITUDE_REGEX_PATTERN = '^(\\+|-)?(?:90(?:(?:\\.0{1,7})?)|(?:[0-9]|[1-8][0-9])(?:(?:\\.[0-9]{1,7})?))$';
     const LONGITUDE_REGEX_PATTERN =
         '^(\\+|-)?(?:180(?:(?:\\.0{1,7})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\\.[0-9]{1,7})?))$';
@@ -24,8 +24,10 @@ export function CoordinatesInputField() {
                     className="coordinates-input-field__input"
                     type="text"
                     inputMode="numeric"
+                    required
                     pattern={LATITUDE_REGEX_PATTERN}
-                    defaultValue={coordinates.latitude}
+                    title="Latitude must be a number between -90 and 90"
+                    defaultValue={previousCoordinates.latitude}
                 />
             </label>
             <label
@@ -39,8 +41,10 @@ export function CoordinatesInputField() {
                     className="coordinates-input-field__input"
                     type="text"
                     inputMode="numeric"
+                    required
                     pattern={LONGITUDE_REGEX_PATTERN}
-                    defaultValue={coordinates.longitude}
+                    title="Longitude must be a number between -180 and 180"
+                    defaultValue={previousCoordinates.longitude}
                 />
             </label>
         </div>

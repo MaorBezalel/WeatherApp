@@ -8,3 +8,10 @@
     font-weight: 700;
     background-color: var(--clr-secondary);
 }
+
+@media (max-width: 540px) {
+    .weather-form__submit-button {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.9rem;
+    }
+}

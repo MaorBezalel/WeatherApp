@@ -11,8 +11,19 @@ import { CurrentLocationInputField } from '@/features/weather-form/components/cu
 import { SubmitButton } from '@/features/weather-form/components/submit-button/SubmitButton';
 import { TabLayout } from '@/components/tab-layout/TabLayout';
 
-import { FormEventHandler } from 'react';
+import { FormEventHandler, PropsWithChildren } from 'react';
 import { Coordinates, WeatherFormSearchType } from '@/types/data.types';
+
+export function WeatherFormContainer({ children }: PropsWithChildren) {
+    return (
+        <div
+            role="presentation"
+            className="weather-form-container"
+        >
+            {children}
+        </div>
+    );
+}
 
 export function WeatherForm() {
     const formState = useSelector((state: RootState) => state.weatherForm);
@@ -68,19 +79,15 @@ export function WeatherForm() {
                 }
             />
 
-            {formState.searchType === 'city' && <CityInputField />}
-            {formState.searchType === 'coordinates' && <CoordinatesInputField />}
+            {formState.searchType === 'city' && <CityInputField previousCityName={formState.value} />}
+            {formState.searchType === 'coordinates' && <CoordinatesInputField previousCoordinates={formState.value} />}
             {formState.searchType === 'current-location' && (
                 <CurrentLocationInputField
-                    onSuccessfulLocationFetch={(position) => {
-                        const coordinates: Coordinates = {
-                            latitude: position.coords.latitude.toString() as Coordinates['latitude'],
-                            longitude: position.coords.longitude.toString() as Coordinates['longitude'],
-                        };
-                        dispatch(setWeatherFormValue(coordinates));
-                    }}
+                    previousCoordinates={formState.value}
+                    geolocationStatus={formState.geolocationStatus}
                 />
             )}
+
             <SubmitButton />
         </form>
     );
