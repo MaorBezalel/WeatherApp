@@ -34,7 +34,7 @@ export function WeatherData() {
     if (hasntSearchedYet) {
         return (
             <div className="weather-data">
-                <WeatherNoDataMessage />
+                return <h2 className="weather-data__message weather-data__message--no-data">No Data Yet</h2>;{' '}
             </div>
         );
     }
@@ -51,7 +51,7 @@ export function WeatherData() {
     if (errorMessage) {
         return (
             <div className="weather-data">
-                <WeatherErrorMessage errorMessage={errorMessage} />
+                return <h2 className="weather-data__message weather-data__message--error">Error: {errorMessage}</h2>;
             </div>
         );
     }
@@ -97,12 +97,4 @@ export function WeatherData() {
             </AdditionaDaylForecastContainer>
         </div>
     );
-}
-
-function WeatherNoDataMessage() {
-    return <h2 className="weather-data__message weather-data__message--no-data">No Data Yet</h2>;
-}
-
-function WeatherErrorMessage({ errorMessage }: { errorMessage: string }) {
-    return <h2 className="weather-data__message weather-data__message--error">Error: {errorMessage}</h2>;
 }
