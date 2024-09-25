@@ -18,11 +18,8 @@
 
     overflow: auto;
     height: fit-content;
-    /* min-height: 0;
-    min-width: 0; */
 
     padding: 0.3rem;
-    scrollbar-width: thin;
 }
 
 .weather-data__additional-forecast__card {
@@ -37,8 +34,6 @@
     cursor: pointer;
 }
 .weather-data__additional-forecast__card[data-selected='true'] {
-    /* background-color: var(--clr-text);
-    color: var(--clr-background); */
     outline: solid 3px var(--clr-text);
 }
 

@@ -1,8 +1,4 @@
 .weather-form-container {
-    /* display: flex;
-    flex-direction: column;
-    align-items: center; */
-
     display: grid;
     grid-template-rows: subgrid;
     grid-row: span 2;
@@ -15,7 +11,9 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    border-radius: inherit;
+
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
 }
 
 .weather-form {
@@ -68,6 +66,9 @@
         grid-row: auto;
 
         padding: 1rem;
+
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
     }
 
     .weather-form {

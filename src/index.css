@@ -1,6 +1,10 @@
 :root[data-theme='light'] {
     --clr-text: hsl(220, 12%, 5%);
+    --clr-text-light: hsl(220, 12%, 30%);
+
     --clr-background: hsl(225, 20%, 96%);
+    --clr-background-main: hsl(225, 20%, 90%);
+
     --clr-primary: hsl(337, 61%, 49%);
     --clr-secondary: hsl(286, 11%, 70%);
     --clr-accent: hsl(308, 11%, 62%);
@@ -9,7 +13,11 @@
 }
 :root[data-theme='dark'] {
     --clr-text: hsl(220, 12%, 95%);
+    --clr-text-light: hsl(220, 12%, 70%);
+
     --clr-background: hsl(225, 20%, 4%);
+    --clr-background-main: hsl(225, 20%, 6%);
+
     --clr-primary: hsl(337, 61%, 51%);
     --clr-secondary: hsl(286, 11%, 30%);
     --clr-accent: hsl(308, 11%, 38%);
@@ -31,8 +39,27 @@
     margin: 0;
 }
 
+::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+    height: 12px; /* Height of the scrollbar (for horizontal scrollbars) */
+}
+
+::-webkit-scrollbar-track {
+    background: var(--clr-background-main); /* Background of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--clr-primary); /* Color of the scrollbar thumb */
+    border-radius: 6px; /* Roundness of the scrollbar thumb */
+    border: 3px solid var(--clr-background-main); /* Space around the scrollbar thumb */
+}
+
+::-webkit-scrollbar-button {
+    display: none; /* Turn off scrollbar buttons */
+}
+
 .layout {
-    background-color: var(--clr-background);
+    background-color: var(--clr-background-main);
     color: var(--clr-text);
     transition:
         background-color 0.25s,
@@ -80,7 +107,7 @@ menu {
     margin-right: auto;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
-    outline: 1px solid red;
+    /* outline: 1px solid red; */
 }
 
 /* desktop-2xl */
