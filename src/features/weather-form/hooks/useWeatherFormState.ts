@@ -30,6 +30,8 @@ export function useWeatherFormState() {
 
         // Dispatch the setWeatherFormValue to update the form state and save it to localStorage
         dispatch(setWeatherFormValue(value));
+
+        // Dispatch the fetchWeatherData to fetch the weather data
         dispatch(fetchWeatherData(value));
     };
 
