@@ -1,44 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import {
     City,
     Coordinates,
     eWeatherFormSearchType,
     WeatherFormSearchType,
-    eGeolocationStatus,
     GeolocationStatus,
 } from '@/types/data.types';
+import { WeatherFormState } from '@/types/state.types';
 
-type WeatherFormByCityState = {
-    searchType: typeof eWeatherFormSearchType.City;
-    value: City;
-};
-type WeatherFormByCoordinatesState = {
-    searchType: typeof eWeatherFormSearchType.Coordinates | typeof eWeatherFormSearchType.CurrentLocation;
-    value: Coordinates;
-};
-type WeatherFormState = (WeatherFormByCityState | WeatherFormByCoordinatesState) & {
-    geolocationStatus: GeolocationStatus;
-};
-
-const WEATHER_FORM_LAST_STATE_KEY = 'weather-app--weather-form-last-state';
-const WEATHER_FORM_CITY_NAME_DEFAULT_VALUE = '';
-const WEATHER_FORM_LATITUDE_LONGITUDE_DEFAULT_VALUE: Coordinates = { latitude: '', longitude: '' };
-
-const retrieveLastState = (): WeatherFormState => {
-    const lastState = localStorage.getItem(WEATHER_FORM_LAST_STATE_KEY);
-    if (!lastState) {
-        return {
-            searchType: eWeatherFormSearchType.City,
-            value: WEATHER_FORM_CITY_NAME_DEFAULT_VALUE,
-            geolocationStatus: eGeolocationStatus.Prompt,
-        };
-    }
-
-    // TODO: Validate that the parsed last state is a valid WeatherFormState
-    const parsedLastState = JSON.parse(lastState) as WeatherFormState;
-    parsedLastState.geolocationStatus = eGeolocationStatus.Prompt;
-    return parsedLastState;
-};
+import {
+    WEATHER_FORM_LAST_STATE_KEY,
+    WEATHER_FORM_CITY_NAME_DEFAULT_VALUE,
+    WEATHER_FORM_LATITUDE_LONGITUDE_DEFAULT_VALUE,
+} from '@/features/weather-form/utils/constants';
+import { retrieveLastState } from '@/features/weather-form/utils/helpers';
 
 const initialState: WeatherFormState = retrieveLastState();
 

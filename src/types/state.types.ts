@@ -10,14 +10,14 @@ import {
 export type WeatherFormByCityState = {
     searchType: typeof eWeatherFormSearchType.City;
     value: City;
+    geolocationStatus: GeolocationStatus;
 };
 export type WeatherFormByCoordinatesState = {
     searchType: typeof eWeatherFormSearchType.Coordinates | typeof eWeatherFormSearchType.CurrentLocation;
     value: Coordinates;
-};
-export type WeatherFormState = (WeatherFormByCityState | WeatherFormByCoordinatesState) & {
     geolocationStatus: GeolocationStatus;
 };
+export type WeatherFormState = WeatherFormByCityState | WeatherFormByCoordinatesState;
 
 export type WeatherDataState = {
     data: WeatherAPIResponse | null;
