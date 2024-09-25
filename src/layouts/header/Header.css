@@ -19,3 +19,20 @@
         font-size: 2.5rem;
     }
 }
+
+@media (max-width: 1024px) {
+    .header {
+        padding: 0;
+        margin: 0;
+    }
+
+    .header__title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 540px) {
+    .header__title {
+        font-size: 1.5rem;
+    }
+}
