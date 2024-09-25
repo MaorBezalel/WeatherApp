@@ -1,27 +1,34 @@
-import { useState, useLayoutEffect } from 'react';
-import { GeolocationStatus, eGeolocationStatus } from '@/types/data.types';
+import { useLayoutEffect } from 'react';
 
-export function useGeolocationAPI(successCallback: PositionCallback) {
-    const [geolocationStatus, setGeolocationStatus] = useState<GeolocationStatus>(eGeolocationStatus.Prompt);
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/store';
+import { setWeatherFormValue, setGeolocationStatus } from '@/features/weather-form/weatherFormSlice';
+
+import { eGeolocationStatus, Coordinates } from '@/types/data.types';
+
+export function useGeolocationAPI() {
+    const dispatch = useDispatch<AppDispatch>();
     const { geolocation } = navigator;
 
     useLayoutEffect(() => {
         if (!geolocation) {
-            setGeolocationStatus(eGeolocationStatus.Unsupported);
-            console.error('Geolocation is not supported in this browser'); // TODO: disable the current location tab if geolocation is not supported in the browser
+            dispatch(setGeolocationStatus(eGeolocationStatus.Unsupported));
+            console.error('Geolocation is not supported in this browser');
         }
 
         geolocation.getCurrentPosition(
             (position) => {
-                setGeolocationStatus(eGeolocationStatus.Granted);
-                successCallback(position);
+                const coordinates: Coordinates = {
+                    latitude: position.coords.latitude.toString() as Coordinates['latitude'],
+                    longitude: position.coords.longitude.toString() as Coordinates['longitude'],
+                };
+                dispatch(setWeatherFormValue(coordinates));
+                dispatch(setGeolocationStatus(eGeolocationStatus.Granted));
             },
             (error) => {
-                setGeolocationStatus(eGeolocationStatus.Denied);
+                dispatch(setGeolocationStatus(eGeolocationStatus.Denied));
                 console.error(error);
             }
         );
     }, []);
-
-    return geolocationStatus;
 }
