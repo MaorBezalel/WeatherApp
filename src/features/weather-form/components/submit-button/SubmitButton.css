@@ -8,6 +8,10 @@
     font-weight: 700;
     background-color: var(--clr-secondary);
 }
+.weather-form__submit-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
 
 @media (max-width: 540px) {
     .weather-form__submit-button {
