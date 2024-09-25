@@ -1,16 +1,18 @@
 import '@/features/weather-form/components/coordinates-input-field/CoordinatesInputField.css';
 
 import { Coordinates } from '@/types/data.types';
+import {
+    LATITUDE_REGEX_PATTERN,
+    LONGITUDE_REGEX_PATTERN,
+    LATITUDE_INPUT_REQUIREMENTS_MESSAGE,
+    LONGITUDE_INPUT_REQUIREMENTS_MESSAGE,
+} from '@/features/weather-form/utils/constants';
 
 interface CoordinatesInputFieldProps {
     previousCoordinates: Coordinates;
 }
 
 export function CoordinatesInputField({ previousCoordinates }: CoordinatesInputFieldProps) {
-    const LATITUDE_REGEX_PATTERN = '^(\\+|-)?(?:90(?:(?:\\.0{1,7})?)|(?:[0-9]|[1-8][0-9])(?:(?:\\.[0-9]{1,7})?))$';
-    const LONGITUDE_REGEX_PATTERN =
-        '^(\\+|-)?(?:180(?:(?:\\.0{1,7})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\\.[0-9]{1,7})?))$';
-
     return (
         <div className="coordinates-input-field">
             <label
@@ -26,7 +28,7 @@ export function CoordinatesInputField({ previousCoordinates }: CoordinatesInputF
                     inputMode="numeric"
                     required
                     pattern={LATITUDE_REGEX_PATTERN}
-                    title="Latitude must be a number between -90 and 90"
+                    title={LATITUDE_INPUT_REQUIREMENTS_MESSAGE}
                     defaultValue={previousCoordinates.latitude}
                 />
             </label>
@@ -43,7 +45,7 @@ export function CoordinatesInputField({ previousCoordinates }: CoordinatesInputF
                     inputMode="numeric"
                     required
                     pattern={LONGITUDE_REGEX_PATTERN}
-                    title="Longitude must be a number between -180 and 180"
+                    title={LONGITUDE_INPUT_REQUIREMENTS_MESSAGE}
                     defaultValue={previousCoordinates.longitude}
                 />
             </label>

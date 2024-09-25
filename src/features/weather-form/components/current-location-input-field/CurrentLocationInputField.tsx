@@ -1,6 +1,6 @@
 import '@/features/weather-form/components/current-location-input-field/CurrentLocationInputField.css';
 
-import { useGeolocationAPI } from '@/features/weather-form/hooks/useGeolocationAPI';
+import { useGeolocationAPI } from '@/features/weather-form/hooks';
 import { CoordinatesInputField } from '../coordinates-input-field/CoordinatesInputField';
 import { GeolocationStatus, eGeolocationStatus, Coordinates } from '@/types/data.types';
 

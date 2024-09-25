@@ -1,9 +1,6 @@
 import '@/features/weather-form/WeatherForm.css';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState, AppDispatch } from '@/store';
-import { fetchWeatherData } from '@/features/weather-data/weatherDataSlice';
-import { setWeatherFormValue, setWeatherFormSearchType } from '@/features/weather-form/weatherFormSlice';
+import { useWeatherFormState } from '@/features/weather-form/hooks';
 
 import { CityInputField } from '@/features/weather-form/components/city-input-field/CityInputField';
 import { CoordinatesInputField } from '@/features/weather-form/components/coordinates-input-field/CoordinatesInputField';
@@ -11,8 +8,7 @@ import { CurrentLocationInputField } from '@/features/weather-form/components/cu
 import { SubmitButton } from '@/features/weather-form/components/submit-button/SubmitButton';
 import { TabLayout } from '@/components/tab-layout/TabLayout';
 
-import { FormEventHandler, PropsWithChildren } from 'react';
-import { Coordinates, WeatherFormSearchType } from '@/types/data.types';
+import { PropsWithChildren } from 'react';
 
 export function WeatherFormContainer({ children }: PropsWithChildren) {
     return (
@@ -26,8 +22,7 @@ export function WeatherFormContainer({ children }: PropsWithChildren) {
 }
 
 export function WeatherForm() {
-    const formState = useSelector((state: RootState) => state.weatherForm);
-    const dispatch = useDispatch<AppDispatch>();
+    const { formState, handleFormSubmit, handleTabChange } = useWeatherFormState();
     const tabs = [
         { label: 'City Name', value: 'city', defaultChecked: formState.searchType === 'city' },
         { label: 'Coordinates', value: 'coordinates', defaultChecked: formState.searchType === 'coordinates' },
@@ -37,32 +32,6 @@ export function WeatherForm() {
             defaultChecked: formState.searchType === 'current-location',
         },
     ];
-
-    const handleFormSubmit: FormEventHandler<HTMLFormElement> = (event) => {
-        event.preventDefault();
-
-        // Extract the city name or coordinates from the form
-        let value: string | Coordinates = '';
-        switch (formState.searchType) {
-            case 'city':
-                value = (event.currentTarget.elements.namedItem('city') as HTMLInputElement).value;
-                break;
-            case 'coordinates':
-            case 'current-location':
-                const latitude = (event.currentTarget.elements.namedItem('latitude') as HTMLInputElement)
-                    .value as Coordinates['latitude'];
-                const longitude = (event.currentTarget.elements.namedItem('longitude') as HTMLInputElement)
-                    .value as Coordinates['longitude'];
-                value = { latitude, longitude };
-                break;
-        }
-
-        // Dispatch the setWeatherFormValue to update the form state and save it to localStorage
-        dispatch(setWeatherFormValue(value));
-
-        // Dispatch the fetchWeatherData to fetch the weather data
-        dispatch(fetchWeatherData(value));
-    };
 
     return (
         <form
@@ -74,9 +43,7 @@ export function WeatherForm() {
             <TabLayout
                 tabs={tabs}
                 tabGroupName="search-type"
-                onTabSelect={({ target: { value } }) =>
-                    dispatch(setWeatherFormSearchType(value as WeatherFormSearchType))
-                }
+                onTabSelect={handleTabChange}
             />
 
             {formState.searchType === 'city' && <CityInputField previousCityName={formState.value} />}
