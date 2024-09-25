@@ -47,28 +47,11 @@ const weatherFormSlice = createSlice({
             localStorage.setItem(WEATHER_FORM_LAST_STATE_KEY, JSON.stringify(state));
         },
 
-        setWeatherFormValueBeforeSubmit(state, action: PayloadAction<City | Coordinates>) {
-            if (typeof action.payload === 'string' && state.searchType !== eWeatherFormSearchType.City) {
-                throw new Error('Invalid value type for search type');
-            }
-            state.value = action.payload;
-        },
-
-        setWeatherFormValueAfterSubmit(state) {
-            localStorage.setItem(WEATHER_FORM_LAST_STATE_KEY, JSON.stringify(state));
-        },
-
         setGeolocationStatus(state, action: PayloadAction<GeolocationStatus>) {
             state.geolocationStatus = action.payload;
         },
     },
 });
 
-export const {
-    setWeatherFormSearchType,
-    setWeatherFormValue,
-    setWeatherFormValueBeforeSubmit,
-    setWeatherFormValueAfterSubmit,
-    setGeolocationStatus,
-} = weatherFormSlice.actions;
+export const { setWeatherFormSearchType, setWeatherFormValue, setGeolocationStatus } = weatherFormSlice.actions;
 export default weatherFormSlice.reducer;
