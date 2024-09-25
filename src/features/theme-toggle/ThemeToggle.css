@@ -1,12 +1,6 @@
 .theme-toggle__container {
     display: flex;
     scale: 0.3;
-    /* margin: -70px;
-    padding-top: 1rem;
-    margin-right: -180px;
-    margin-bottom: -100px;
-    place-self: flex-end; */
-
     margin-inline: -170px;
     margin-bottom: -100px;
     translate: 0 -50px;
@@ -81,42 +75,25 @@
     fill: #fff;
 }
 
-/* @media (max-width: 1280px) {
+@media (max-width: 1280px) {
     .theme-toggle__container {
         scale: 0.25;
-        margin: -70px;
-        padding-top: 0.5rem;
-        margin-right: -195px;
-        margin-bottom: -100px;
-    }
-}
-
-@media (max-width: 1024px) {
-    .theme-toggle__container {
-        scale: 0.2;
-        margin: -70px;
-        padding-top: 0.2rem;
-        margin-right: -207px;
-        margin-bottom: -85px;
+        margin-right: -190px;
+        margin-bottom: -110px;
     }
 }
 
 @media (max-width: 640px) {
     .theme-toggle__container {
-        scale: 0.2;
-        margin: -70px;
-        padding-top: 0.1rem;
-        margin-right: -207px;
-        margin-bottom: -75px;
+        scale: 0.23;
+        margin-right: -195px;
     }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 540px) {
     .theme-toggle__container {
         scale: 0.18;
-        margin: -70px;
-        padding-top: 0.1rem;
-        margin-right: -212px;
-        margin-bottom: -72px;
+        margin-right: -200px;
+        margin-bottom: -108px;
     }
-} */
+}
