@@ -11,7 +11,16 @@ WeatherApp is a web application that provides weather forecasts for different lo
 
 ## Features
 
--   [x] Display the current weather for a specific location (city name | latitude and longitude | user's current location via geolocation).
+-   [x] Search for the weather forecast of any location in the world by:
+    -   [x] City name.
+    -   [x] Given Latitude and longitude.
+    -   [x] User's current location (via browser Geolocation API).
+-   [x] Display the current selected weather data, including:
+    -   [x] Temperature.
+    -   [x] Weather condition.
+    -   [x] Humidity.
+    -   [x] Wind speed.
+    -   [x] Weather icon that describes the weather conditions.
 -   [x] Display the weather forecast for today, as well as either 3 days or 7 days ahead.
 -   [x] Uses Redux to manage the application's state.
 -   [x] Responsive design that works on both desktop, tablet, and mobile devices.
