@@ -9,7 +9,7 @@ import {
     getRequestUrl,
     getCachedData,
     getWeatherData,
-    recordFetchTimestamp,
+    recordStaleTimestamp,
     cacheWeatherData,
 } from '@/features/weather-data/utils/helpers';
 
@@ -23,9 +23,9 @@ export const fetchWeatherData = createAsyncThunk(
         const cachedData = await getCachedData(cache, requestUrl);
         if (cachedData) return cachedData;
 
-        // Otherwise, fetch the data, record its fetch timestamp, cache it, and return it
+        // Otherwise, fetch the data, record its stale timestamp, cache it, and return it
         const data = await getWeatherData(requestUrl);
-        recordFetchTimestamp(data);
+        recordStaleTimestamp(data);
         await cacheWeatherData(cache, requestUrl, data);
         return data;
     }

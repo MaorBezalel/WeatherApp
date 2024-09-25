@@ -1,7 +1,6 @@
 import '@/features/weather-data/WeatherData.css';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState, AppDispatch } from '@/store';
+import { useWeatherDataState } from '@/features/weather-data/hooks/useWeatherDataState';
 import { WeatherDataForecastDaysCountToDisplay } from '@/types/data.types';
 
 import { LoadingSpinner } from '@/components/loading-spinner/LoadingSpinner';
@@ -18,13 +17,12 @@ import {
     DayForecastCardsGrid,
 } from '@/features/weather-data/components/additional-day-forecast/AdditionalDayForecast';
 
-import { setForecastDaysCountToDisplay, setSelectedDayForecastIndex } from '@/features/weather-data/weatherDataSlice';
-
 export function WeatherData() {
-    const dispatch = useDispatch<AppDispatch>();
-    const { data, isLoading, errorMessage, selectedDayForecastIndex, forecastDaysCountToDisplay } = useSelector(
-        (state: RootState) => state.weatherData
-    );
+    const {
+        weatherDataState: { data, isLoading, errorMessage, selectedDayForecastIndex, forecastDaysCountToDisplay },
+        handleForecastDaysCountToDisplayChange,
+        handleSelectedDayForecastIndexChange,
+    } = useWeatherDataState();
     const hasntSearchedYet = !isLoading && !data && !errorMessage;
     const forecastTabs = [
         { label: '3 Days Forecast', value: 3, defaultChecked: forecastDaysCountToDisplay === 3 },
@@ -79,7 +77,7 @@ export function WeatherData() {
                     tabs={forecastTabs}
                     tabGroupName="forecast-tabs"
                     onTabSelect={({ target: { value } }) =>
-                        dispatch(setForecastDaysCountToDisplay(Number(value) as WeatherDataForecastDaysCountToDisplay))
+                        handleForecastDaysCountToDisplayChange(Number(value) as WeatherDataForecastDaysCountToDisplay)
                     }
                 />
 
@@ -90,7 +88,7 @@ export function WeatherData() {
                             key={dayForecastData.ts}
                             dayForecastData={dayForecastData}
                             isSelected={index === selectedDayForecastIndex}
-                            onSelect={() => dispatch(setSelectedDayForecastIndex(index))}
+                            onSelect={() => handleSelectedDayForecastIndexChange(index)}
                         />
                     )}
                 />

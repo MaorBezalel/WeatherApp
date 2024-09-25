@@ -3,6 +3,7 @@ import { City, Coordinates } from '@/types/data.types';
 import {
     WEATHER_API_URL_WITH_DEFAULTS_AND_CITY,
     WEATHER_API_URL_WITH_DEFAULTS_AND_COORDINATES,
+    WEATHER_DATA_POLLING_INTERVAL,
 } from '@/features/weather-data/utils/constants';
 
 export const getRequestUrl = (cityOrCoordinates: City | Coordinates): string => {
@@ -15,8 +16,7 @@ export const getCachedData = async (cache: Cache, requestUrl: string): Promise<W
     const cachedResponse = await cache.match(requestUrl);
     if (cachedResponse) {
         const cachedData = (await cachedResponse.json()) as WeatherAPIResponse;
-        const fetchTimestamp = cachedData.fetchTimestamp;
-        const isDataStale = Date.now() - fetchTimestamp > 1000 * 60 * 5; // 5 minutes
+        const isDataStale = Date.now() >= cachedData.staleTimestamp;
         if (!isDataStale) {
             return cachedData;
         }
@@ -48,8 +48,8 @@ export const getWeatherData = async (requestUrl: string): Promise<WeatherAPIResp
     return response.json();
 };
 
-export const recordFetchTimestamp = (data: WeatherAPIResponse): WeatherAPIResponse => {
-    data.fetchTimestamp = Date.now();
+export const recordStaleTimestamp = (data: WeatherAPIResponse): WeatherAPIResponse => {
+    data.staleTimestamp = Date.now() + WEATHER_DATA_POLLING_INTERVAL; // the timestamp when the data will be stale
     return data;
 };
 

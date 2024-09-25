@@ -9,7 +9,7 @@ export type WeatherAPIResponse = {
     state_code: string;
 
     /** A property stored by us which reserved for caching */
-    fetchTimestamp: number;
+    staleTimestamp: number;
 };
 
 export type WeatherAPIErrorResponse = {
