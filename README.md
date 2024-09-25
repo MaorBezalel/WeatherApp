@@ -4,9 +4,23 @@ WeatherApp is a web application that provides weather forecasts for different lo
 
 ## Table of Contents
 
+-   [Features](#features)
 -   [Prerequisites](#prerequisites)
 -   [Installation](#installation)
 -   [Running the Project](#running-the-project)
+
+## Features
+
+-   [x] Display the current weather for a specific location (city name | latitude and longitude | user's current location via geolocation).
+-   [x] Display the weather forecast for today, as well as either 3 days or 7 days ahead.
+-   [x] Uses Redux to manage the application's state.
+-   [x] Responsive design that works on both desktop, tablet, and mobile devices.
+-   [x] Dark mode support.
+-   [x] Error handling for invalid locations and network errors.
+-   [x] Loading spinner while fetching data.
+-   [x] Data persistence using local storage to remember the user's last search input.
+-   [x] Caching of weather data to reduce the number of API requests.
+-   [x] Data pooling every 5 minutes to keep the weather data up-to-date.
 
 ## Prerequisites
 
