@@ -1,35 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Wrapper } from '@/layouts/wrapper/Wrapper';
+import { Header } from '@/layouts/header/Header';
+import { Main } from '@/layouts/main/Main';
 
-function App() {
-  const [count, setCount] = useState(0)
+import { useSelector } from 'react-redux';
+import { useLayoutEffect } from 'react';
+import { RootState } from '@/store';
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+import { WeatherForm, WeatherFormContainer } from '@/features/weather-form/WeatherForm';
+import { WeatherData } from '@/features/weather-data/WeatherData';
+
+export default function App() {
+    const theme = useSelector((state: RootState) => state.themeToggle.value);
+
+    useLayoutEffect(() => {
+        document.documentElement.dataset.theme = theme;
+    }, [theme]);
+
+    return (
+        <Wrapper>
+            <Main>
+                <WeatherFormContainer>
+                    <Header />
+                    <WeatherForm />
+                </WeatherFormContainer>
+
+                <WeatherData />
+            </Main>
+        </Wrapper>
+    );
 }
-
-export default App

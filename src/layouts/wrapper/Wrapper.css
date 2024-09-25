@@ -1,0 +1,24 @@
+.layout-wrapper {
+    background-color: var(--clr-background);
+    color: var(--clr-text);
+    transition:
+        background-color 0.25s,
+        color 0.25s;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+
+    overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+    .layout-wrapper {
+        min-height: auto;
+    }
+}

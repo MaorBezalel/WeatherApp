@@ -1,0 +1,22 @@
+.main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 50% 50%;
+
+    height: 90%;
+    min-height: 90%;
+    padding: 0 !important;
+    border-radius: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .main {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+
+        height: 100%;
+        min-height: auto;
+
+        overflow: hidden;
+    }
+}
