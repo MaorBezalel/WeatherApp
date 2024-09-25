@@ -1,0 +1,163 @@
+.weather-data__selected-day-forecast {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    margin-bottom: auto;
+}
+
+.weather-data__selected-day-forecast__title {
+    display: inline-block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--clr-text);
+}
+
+.weather-data__selected-day-forecast-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--clr-secondary);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: solid 2px var(--clr-text);
+}
+
+.weather-data__selected-day-forecast-display-leftside {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.weather-data__selected-day-forecast-display-leftside__title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.weather-data__selected-day-forecast-display-leftside__title--icon {
+    width: 4rem;
+    height: 4rem;
+}
+
+.weather-data__selected-day-forecast-display-leftside__title--temperature {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--clr-primary);
+}
+
+.weather-data__selected-day-forecast-display-leftside__date {
+    font-size: 1rem;
+    font-weight: 700;
+    padding-left: 1rem;
+    color: var(--clr-text);
+}
+
+.weather-data__selected-day-forecast-display-rightside {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.weather-data__selected-day-forecast-display-rightside__item {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--clr-text);
+}
+
+@media (max-width: 1280px) {
+    .weather-data__selected-day-forecast__title {
+        font-size: 2rem;
+    }
+
+    .weather-data__selected-day-forecast-display-leftside__title--icon {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .weather-data__selected-day-forecast-display-leftside__title--temperature {
+        font-size: 1.5rem;
+    }
+
+    .weather-data__selected-day-forecast-display-leftside__date {
+        font-size: 0.8rem;
+    }
+
+    .weather-data__selected-day-forecast-display-rightside__item {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .weather-data__selected-day-forecast {
+        gap: 0.3rem;
+    }
+
+    .weather-data__selected-day-forecast__title {
+        font-size: 1.8rem;
+    }
+
+    .weather-data__selected-day-forecast-display {
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .weather-data__selected-day-forecast-display-leftside {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .weather-data__selected-day-forecast-display-leftside__title--icon {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .weather-data__selected-day-forecast-display-leftside__title--temperature {
+        font-size: 1.2rem;
+    }
+
+    .weather-data__selected-day-forecast-display-rightside {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+
+@media (max-width: 540px) {
+    .weather-data__selected-day-forecast__title {
+        font-size: 1.4rem;
+    }
+
+    .weather-data__selected-day-forecast-display-leftside__title--temperature {
+        font-size: 1rem;
+    }
+
+    .weather-data__selected-day-forecast-display-leftside__date {
+        font-size: 0.7rem;
+    }
+
+    .weather-data__selected-day-forecast-display-rightside__item {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 425px) {
+    .weather-data__selected-day-forecast__title {
+        font-size: 1.3rem;
+    }
+
+    .weather-data__selected-day-forecast-display-leftside__title--temperature {
+        font-size: 0.8rem;
+    }
+
+    .weather-data__selected-day-forecast-display-leftside__date {
+        font-size: 0.6rem;
+    }
+
+    .weather-data__selected-day-forecast-display-rightside__item {
+        font-size: 0.6rem;
+    }
+}
