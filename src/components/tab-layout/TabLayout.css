@@ -27,3 +27,34 @@
     background-color: var(--clr-text);
     color: var(--clr-background);
 }
+
+@media (max-width: 1480px) {
+    .tab-button {
+        padding: 0.4rem 0.6rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .tab-button {
+        padding: 0.3rem 0.5rem;
+    }
+}
+
+@media (max-width: 540px) {
+    .tab-button {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 425px) {
+    .tab-button {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .tab-button {
+        padding: 0.1rem 0.3rem;
+    }
+}
