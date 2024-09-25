@@ -1,62 +1,17 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { City, Coordinates } from '@/types/data.types';
-import { WeatherAPIErrorResponse, WeatherAPIResponse } from '@/types/api.types';
 
-const WEATHER_DATA_CACHE_NAME = 'weather-data';
+import { WeatherDataState } from '@/types/state.types';
+import { WeatherAPIResponse } from '@/types/api.types';
+import { City, Coordinates, WeatherDataForecastDaysCountToDisplay } from '@/types/data.types';
 
-const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
-const WEATHER_API_URL = 'https://api.weatherbit.io/v2.0/forecast/daily';
-const WEATHER_API_URL_WITH_DEFAULTS = `${WEATHER_API_URL}?days=7&key=${WEATHER_API_KEY}`;
-const WEATHER_API_URL_WITH_DEFAULTS_AND_CITY = (city: string) => `${WEATHER_API_URL_WITH_DEFAULTS}&city=${city}`;
-const WEATHER_API_URL_WITH_DEFAULTS_AND_COORDINATES = (coordinates: Coordinates) =>
-    `${WEATHER_API_URL_WITH_DEFAULTS}&lat=${coordinates.latitude}&lon=${coordinates.longitude}`;
-
-const getRequestUrl = (cityOrCoordinates: City | Coordinates): string => {
-    return typeof cityOrCoordinates === 'string'
-        ? WEATHER_API_URL_WITH_DEFAULTS_AND_CITY(cityOrCoordinates)
-        : WEATHER_API_URL_WITH_DEFAULTS_AND_COORDINATES(cityOrCoordinates);
-};
-
-const getCachedData = async (cache: Cache, requestUrl: string): Promise<WeatherAPIResponse | null> => {
-    const cachedResponse = await cache.match(requestUrl);
-    if (cachedResponse) {
-        const cachedData = (await cachedResponse.json()) as WeatherAPIResponse;
-        const fetchTimestamp = cachedData.fetchTimestamp;
-        const isDataStale = Date.now() - fetchTimestamp > 1000 * 60 * 5; // 5 minutes
-        if (!isDataStale) {
-            return cachedData;
-        }
-    }
-    return null;
-};
-
-const handleAPIResponse = async (response: Response): Promise<WeatherAPIResponse> => {
-    if (!response.ok) {
-        const errorJson = (await response.json()) as WeatherAPIErrorResponse;
-        throw new Error(errorJson.error);
-    }
-    if (response.status === 204) {
-        // This means that the city is not found
-        throw new Error('City not found');
-    }
-    return response.json();
-};
-
-const fetchAndCacheData = async (cache: Cache, requestUrl: string): Promise<WeatherAPIResponse> => {
-    let response: Response;
-
-    try {
-        response = await fetch(requestUrl);
-    } catch (error) {
-        throw new Error('Failed to fetch weather data due to network error');
-    }
-
-    const data = await handleAPIResponse(response);
-    data.fetchTimestamp = Date.now();
-    const responseToCache = new Response(JSON.stringify(data));
-    await cache.put(requestUrl, responseToCache);
-    return data;
-};
+import { WEATHER_DATA_CACHE_NAME } from '@/features/weather-data/utils/constants';
+import {
+    getRequestUrl,
+    getCachedData,
+    getWeatherData,
+    recordFetchTimestamp,
+    cacheWeatherData,
+} from '@/features/weather-data/utils/helpers';
 
 export const fetchWeatherData = createAsyncThunk(
     'weatherData/fetchWeatherData',
@@ -64,24 +19,17 @@ export const fetchWeatherData = createAsyncThunk(
         const cache = await caches.open(WEATHER_DATA_CACHE_NAME);
         const requestUrl = getRequestUrl(cityOrCoordinates);
 
+        // Check if the data is cached and not stale - return the cached data if it's fresh
         const cachedData = await getCachedData(cache, requestUrl);
-        if (cachedData) {
-            return cachedData;
-        }
+        if (cachedData) return cachedData;
 
-        return fetchAndCacheData(cache, requestUrl);
+        // Otherwise, fetch the data, record its fetch timestamp, cache it, and return it
+        const data = await getWeatherData(requestUrl);
+        recordFetchTimestamp(data);
+        await cacheWeatherData(cache, requestUrl, data);
+        return data;
     }
 );
-
-// ------------------------------------
-
-type WeatherDataState = {
-    data: WeatherAPIResponse | null;
-    isLoading: boolean;
-    errorMessage: string | null;
-    selectedDayForecastIndex: number;
-    forecastDaysCountToDisplay: 3 | 7;
-};
 
 const initialState: WeatherDataState = {
     data: null,
@@ -98,7 +46,7 @@ const weatherDataSlice = createSlice({
         setSelectedDayForecastIndex(state, action: PayloadAction<number>) {
             state.selectedDayForecastIndex = action.payload;
         },
-        setForecastDaysCountToDisplay(state, action: PayloadAction<3 | 7>) {
+        setForecastDaysCountToDisplay(state, action: PayloadAction<WeatherDataForecastDaysCountToDisplay>) {
             state.forecastDaysCountToDisplay = action.payload;
         },
     },

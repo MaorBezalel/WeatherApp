@@ -2,6 +2,7 @@ import '@/features/weather-data/WeatherData.css';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '@/store';
+import { WeatherDataForecastDaysCountToDisplay } from '@/types/data.types';
 
 import { LoadingSpinner } from '@/components/loading-spinner/LoadingSpinner';
 import { TabLayout } from '@/components/tab-layout/TabLayout';
@@ -78,7 +79,7 @@ export function WeatherData() {
                     tabs={forecastTabs}
                     tabGroupName="forecast-tabs"
                     onTabSelect={({ target: { value } }) =>
-                        dispatch(setForecastDaysCountToDisplay(Number(value) as 3 | 7))
+                        dispatch(setForecastDaysCountToDisplay(Number(value) as WeatherDataForecastDaysCountToDisplay))
                     }
                 />
 

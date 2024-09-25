@@ -19,3 +19,10 @@ export const eGeolocationStatus = {
     Unsupported: 'unsupported',
 } as const;
 export type GeolocationStatus = (typeof eGeolocationStatus)[keyof typeof eGeolocationStatus];
+
+export const eWeatherDataForecastDaysCountToDisplay = {
+    Three: 3,
+    Seven: 7,
+} as const;
+export type WeatherDataForecastDaysCountToDisplay =
+    (typeof eWeatherDataForecastDaysCountToDisplay)[keyof typeof eWeatherDataForecastDaysCountToDisplay];
