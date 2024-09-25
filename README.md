@@ -1,50 +1,49 @@
-# React + TypeScript + Vite
+# WeatherApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+WeatherApp is a web application that provides weather forecasts for different locations. This project uses Vite, React, and Redux for the frontend, and it fetches weather data from [Weatherbit API](https://www.weatherbit.io/).
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-   [Prerequisites](#prerequisites)
+-   [Installation](#installation)
+-   [Running the Project](#running-the-project)
 
-## Expanding the ESLint configuration
+## Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Before you begin, ensure you have met the following requirements:
 
-- Configure the top-level `parserOptions` property like this:
+-   You have installed [Node.js](https://nodejs.org/) (version 14 or higher) and [npm](https://www.npmjs.com/) (version 6 or higher).
+-   You have a GitHub account.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Installation
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+1. Clone the repository:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+    ```sh
+    git clone https://github.com/MaorBezalel/WeatherApp.git
+    ```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+2. Install the dependencies:
+
+    ```sh
+    npm install
+    ```
+
+## Running the Project
+
+1. Set up the environment variables:
+
+    - Create a `.env` file in the root directory of the project.
+    - Add the following line to the `.env` file:
+
+        ```properties
+        VITE_WEATHER_API_KEY=<your-api-key>
+        ```
+
+2. Start the development server:
+
+    ```sh
+    npm run dev
+    ```
+
+3. Open your browser and navigate to `http://localhost:5173` to see the application running.
